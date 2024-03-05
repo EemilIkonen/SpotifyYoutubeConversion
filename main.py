@@ -55,7 +55,7 @@ client_secret = settings.SPOTIFY_CLIENT_SECRET
 youtube_api_key = settings.YOUTUBE_API_KEY
 
 # Example usage
-url = "https://open.spotify.com/track/7dS5EaCoMnN7DzlpT6aRn2?si=-vinRd7qT7qnfkv345d4rA "
+url = "https://open.spotify.com/track/7dS5EaCoMnN7DzlpT6aRn2?si=-vinRd7qT7qnfkv345d4rA"
 spotify_api = SpotifyAPI(client_id, client_secret)
 youtube_api = YoutubeAPI(youtube_api_key)
 print(youtube_api.search_youtube_video(spotify_api.get_track_info(url)))
