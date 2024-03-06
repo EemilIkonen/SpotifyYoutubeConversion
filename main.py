@@ -5,8 +5,8 @@ import settings
 from googleapiclient.discovery import build
 
 
-class SpotifyAPI:
-    """Class for Spotify API client. Requires client ID and client secret to authenticate."""
+class SpotifyService:
+    """Class for Spotify Service. Requires client ID and client secret to authenticate."""
 
     def __init__(self, client_id, client_secret):
         self.sp = spotipy.Spotify(
@@ -42,8 +42,8 @@ class SpotifyAPI:
         return track_info
 
 
-class YoutubeAPI:
-    """Class for YouTube API client. Requires API key to authenticate."""
+class YoutubeService:
+    """Class for YouTube service. Requires API key to authenticate."""
 
     def __init__(self, api_key):
         self.youtube = build("youtube", "v3", developerKey=api_key)
@@ -62,16 +62,16 @@ class YoutubeAPI:
             return f"https://www.youtube.com/watch?v={video_id}"
 
 
-client_id = settings.SPOTIFY_CLIENT_ID
-client_secret = settings.SPOTIFY_CLIENT_SECRET
+spotify_client_id = settings.SPOTIFY_CLIENT_ID
+spotify_client_secret = settings.SPOTIFY_CLIENT_SECRET
 youtube_api_key = settings.YOUTUBE_API_KEY
 
 # Example usage
 url = "https://open.spotify.com/track/7dS5EaCoMnN7DzlpT6aRn2?si=-vinRd7qT7qnfkv345d4rA"
 url2 = "https://open.spotify.com/episode/2DpTFSs33YH8kX4JVAXz3G?si=621389cfa1a440fe"
 url3 = "https://open.spotify.com/show/2ZUhk9HxrpjNVge0BELaf1?si=594fad92629a4ea3"
-spotify_api = SpotifyAPI(client_id, client_secret)
-youtube_api = YoutubeAPI(youtube_api_key)
-print(youtube_api.search_youtube_video(spotify_api.get_track_info(url)))
-print(youtube_api.search_youtube_video(spotify_api.get_track_info(url2)))
-print(youtube_api.search_youtube_video(spotify_api.get_track_info(url3)))
+spotify_service = SpotifyService(spotify_client_id, spotify_client_secret)
+youtube_service = YoutubeService(youtube_api_key)
+print(youtube_service.search_youtube_video(spotify_service.get_track_info(url)))
+print(youtube_service.search_youtube_video(spotify_service.get_track_info(url2)))
+print(youtube_service.search_youtube_video(spotify_service.get_track_info(url3)))
