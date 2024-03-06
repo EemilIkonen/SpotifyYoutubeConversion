@@ -15,17 +15,25 @@ class SpotifyAPI:
         )
 
     # Function to extract track ID from Spotify URL
-    def extract_track_id(self, spotify_url):
-        # Use regular expression to find the track ID from the URL
-        match = re.search(r"/track/(\w+)", spotify_url)
-        if match:
-            return match.group(1)
+    def extract_id(self, spotify_url):
+        # Check if the URL is for a track, episode, or show
+        if "track" in spotify_url:
+            # Use regular expression to find the track ID from the URL
+            match = re.search(r"/track/(\w+)", spotify_url)
+            if match:
+                return match.group(1)
+            else:
+                raise ValueError("Invalid Spotify URL")
+        elif "episode" in spotify_url:
+            raise ValueError("Invalid URL: Podcasts not currently supported.")
+        elif "show" in spotify_url:
+            raise ValueError("Invalid URL: Url was for a show, not a track.")
         else:
             raise ValueError("Invalid Spotify URL")
 
     # Function to get track information from Spotify URL
     def get_track_info(self, spotify_url):
-        track_id = self.extract_track_id(spotify_url)
+        track_id = self.extract_id(spotify_url)
 
         # Use the extracted track ID to get track information
         track_info = self.sp.track(track_id)
