@@ -64,6 +64,10 @@ youtube_api_key = settings.YOUTUBE_API_KEY
 
 # Example usage
 url = "https://open.spotify.com/track/7dS5EaCoMnN7DzlpT6aRn2?si=-vinRd7qT7qnfkv345d4rA"
+url2 = "https://open.spotify.com/episode/2DpTFSs33YH8kX4JVAXz3G?si=621389cfa1a440fe"
+url3 = "https://open.spotify.com/show/2ZUhk9HxrpjNVge0BELaf1?si=594fad92629a4ea3"
 spotify_api = SpotifyAPI(client_id, client_secret)
 youtube_api = YoutubeAPI(youtube_api_key)
 print(youtube_api.search_youtube_video(spotify_api.get_track_info(url)))
+print(youtube_api.search_youtube_video(spotify_api.get_track_info(url2)))
+print(youtube_api.search_youtube_video(spotify_api.get_track_info(url3)))
