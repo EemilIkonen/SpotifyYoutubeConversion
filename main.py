@@ -6,6 +6,8 @@ from googleapiclient.discovery import build
 
 
 class SpotifyAPI:
+    """Class for Spotify API client. Requires client ID and client secret to authenticate."""
+
     def __init__(self, client_id, client_secret):
         self.sp = spotipy.Spotify(
             auth_manager=SpotifyClientCredentials(
@@ -41,6 +43,8 @@ class SpotifyAPI:
 
 
 class YoutubeAPI:
+    """Class for YouTube API client. Requires API key to authenticate."""
+
     def __init__(self, api_key):
         self.youtube = build("youtube", "v3", developerKey=api_key)
 
