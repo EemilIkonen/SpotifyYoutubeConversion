@@ -2,6 +2,13 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import re
 
+# TODO:
+# Error handling
+# Docstrings
+# Type hints
+# Tests
+# Logging
+
 
 class SpotifyService:
     """Spotify Service. Requires client ID and client secret to authenticate."""
