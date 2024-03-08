@@ -1,9 +1,6 @@
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
-import re
 import settings
-from googleapiclient.discovery import build
-
+from spotify_service import SpotifyService
+from youtube_service import YoutubeService
 
 spotify_client_id = settings.SPOTIFY_CLIENT_ID
 spotify_client_secret = settings.SPOTIFY_CLIENT_SECRET
