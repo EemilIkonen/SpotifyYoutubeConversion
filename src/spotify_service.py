@@ -41,34 +41,41 @@ class SpotifyService:
             return "playlist"
         raise ValueError("Invalid Spotify URL")
 
-    def get_track_info(self, track_id):
-        return self.sp.track(track_id)
+    def get_info(self, spotify_id: str, spotify_type: str) -> dict:
+        """
+        Get information about a specific Spotify content based on its ID and type.
 
-    def search_track(self, track_info):
-        query = f"{track_info['name']} {track_info['artists'][0]['name']}"
-        search_response = self.sp.search(q=query, limit=1, type="track")
-        return search_response["tracks"]["items"][0]["external_urls"]["spotify"]
+        :param spotify_id: The ID of the Spotify content.
+        :param spotify_type: The type of the Spotify content ("track", "episode", "show", or "playlist").
+        :return: The information about the specified Spotify content.
+        """
+        if spotify_type == "track":
+            return self.sp.track(spotify_id)
+        elif spotify_type == "episode":
+            return self.sp.episode(spotify_id)
+        elif spotify_type == "show":
+            return self.sp.show(spotify_id)
+        elif spotify_type == "playlist":
+            return self.sp.playlist(spotify_id)
+        else:
+            raise ValueError(
+                "Invalid Spotify type. Expected one of: track, episode, show, playlist"
+            )
 
-    def get_episode_info(self, episode_id):
-        return self.sp.episode(episode_id)
+    def search(
+        self, name: str, search_type: str, artist: str = None, show: str = None
+    ) -> str:
+        """
+        Search for content on Spotify and return the URL of the first search result.
 
-    def search_episode(self, episode_info):
-        query = f"{episode_info['name']} {episode_info['artists'][0]['name']}"
-        search_response = self.sp.search(q=query, limit=1, type="episode")
-        return search_response["episodes"]["items"][0]["external_urls"]["spotify"]
-
-    def get_show_info(self, show_id):
-        return self.sp.show(show_id)
-
-    def search_show(self, show_info):
-        query = f"{show_info['name']} {show_info['artists'][0]['name']}"
-        search_response = self.sp.search(q=query, limit=1, type="show")
-        return search_response["shows"]["items"][0]["external_urls"]["spotify"]
-
-    def get_playlist_info(self, playlist_id):
-        return self.sp.playlist(playlist_id)
-
-    def search_playlist(self, playlist_info):
-        query = f"{playlist_info['name']} {playlist_info['artists'][0]['name']}"
-        search_response = self.sp.search(q=query, limit=1, type="playlist")
-        return search_response["playlists"]["items"][0]["external_urls"]["spotify"]
+        :param name: The name of the content to search for.
+        :param search_type: The type of content to search for ("track", "episode", "show", or "playlist").
+        :param artist: The name of the artist (for tracks only). This is optional.
+        :param show: The name of the show (for episodes only). This is optional.
+        :return: The Spotify URL of the first search result.
+        """
+        query = f"{name['name']} {name['artist'] if artist else ''} {name['show'] if show else ''}"
+        search_response = self.sp.search(q=query, limit=1, type=search_type)
+        return search_response[search_type + "s"]["items"][0]["external_urls"][
+            "spotify"
+        ]
