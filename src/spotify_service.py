@@ -13,7 +13,7 @@ import re
 class SpotifyService:
     """Spotify Service. Requires client ID and client secret to authenticate."""
 
-    def __init__(self, client_id, client_secret):
+    def __init__(self, client_id: str, client_secret: str):
         self.sp = spotipy.Spotify(
             auth_manager=SpotifyClientCredentials(
                 client_id=client_id,
@@ -21,7 +21,13 @@ class SpotifyService:
             )
         )
 
-    def extract_id(self, spotify_url):
+    def extract_id(self, spotify_url: str) -> str:
+        """
+        Return the ID of the Spotify content based on the URL.
+
+        :param spotify_url: The URL of the Spotify content.
+        :return: The ID of the Spotify content.
+        """
         url_types = {
             "track": r"/track/(\w+)",
             "episode": r"/episode/(\w+)",
@@ -37,7 +43,13 @@ class SpotifyService:
 
         raise ValueError("Invalid Spotify URL")
 
-    def get_type(self, spotify_url):
+    def get_type(self, spotify_url: str) -> str:
+        """
+        Return the type of the Spotify content based on the URL.
+
+        :param spotify_url: The URL of the Spotify content.
+        :return: The type of the Spotify content ("track", "episode", "show", or "playlist").
+        """
         if "track" in spotify_url:
             return "track"
         elif "episode" in spotify_url:
