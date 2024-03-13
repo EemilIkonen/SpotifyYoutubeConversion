@@ -41,7 +41,7 @@ class SpotifyService:
                 if match:
                     return match.group(1)
 
-        raise ValueError("Invalid Spotify URL")
+        raise ValueError(f"Invalid Spotify URL: {spotify_url}")
 
     def get_type(self, spotify_url: str) -> str:
         """
