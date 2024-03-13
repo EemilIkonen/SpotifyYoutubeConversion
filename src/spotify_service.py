@@ -21,6 +21,20 @@ class SpotifyService:
             )
         )
 
+    def test_url(self, spotify_url: str) -> bool:
+        """
+        Test if the URL is a valid Spotify URL.
+
+        :param spotify_url: The URL of the Spotify content.
+        :return: True if the URL is a valid Spotify URL, False otherwise.
+        """
+        url_regex = r"https://open.spotify.com/(track|episode|show|playlist)/\w+"
+
+        if re.match(url_regex, spotify_url):
+            return True
+        else:
+            return False
+
     def extract_id(self, spotify_url: str) -> str:
         """
         Return the ID of the Spotify content based on the URL.
@@ -35,11 +49,12 @@ class SpotifyService:
             "playlist": r"/playlist/(\w+)",
         }
 
-        for url_type, pattern in url_types.items():
-            if url_type in spotify_url:
-                match = re.search(pattern, spotify_url)
-                if match:
-                    return match.group(1)
+        if self.test_url(spotify_url):
+            for url_type, pattern in url_types.items():
+                if url_type in spotify_url:
+                    match = re.search(pattern, spotify_url)
+                    if match:
+                        return match.group(1)
 
         raise ValueError(f"Invalid Spotify URL: {spotify_url}")
 
@@ -50,14 +65,17 @@ class SpotifyService:
         :param spotify_url: The URL of the Spotify content.
         :return: The type of the Spotify content ("track", "episode", "show", or "playlist").
         """
-        if "track" in spotify_url:
-            return "track"
-        elif "episode" in spotify_url:
-            return "episode"
-        elif "show" in spotify_url:
-            return "show"
-        elif "playlist" in spotify_url:
-            return "playlist"
+
+        if self.test_url(spotify_url):
+            if "track" in spotify_url:
+                return "track"
+            elif "episode" in spotify_url:
+                return "episode"
+            elif "show" in spotify_url:
+                return "show"
+            elif "playlist" in spotify_url:
+                return "playlist"
+
         raise ValueError("Invalid Spotify URL")
 
     def get_info(self, spotify_id: str, spotify_type: str) -> dict:
