@@ -31,3 +31,7 @@ This section outlines the planned features and improvements for this project. Th
 ## Contribution
 
 This project is currently used for learning. No contribution needed at the moment.
+
+## How to use
+
+- Run tests: `python -m unittest discover `
