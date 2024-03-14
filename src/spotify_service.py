@@ -42,6 +42,9 @@ class SpotifyService:
         :param spotify_url: The URL of the Spotify content.
         :return: The ID of the Spotify content.
         """
+        if not self.test_url(spotify_url):
+            raise ValueError(f"Invalid Spotify URL: {spotify_url}")
+
         url_types = {
             "track": r"/track/(\w+)",
             "episode": r"/episode/(\w+)",
@@ -49,12 +52,12 @@ class SpotifyService:
             "playlist": r"/playlist/(\w+)",
         }
 
-        if self.test_url(spotify_url):
-            for url_type, pattern in url_types.items():
-                if url_type in spotify_url:
-                    match = re.search(pattern, spotify_url)
-                    if match:
-                        return match.group(1)
+        for url_type, pattern in url_types.items():
+            if url_type not in spotify_url:
+                continue
+            match = re.search(pattern, spotify_url)
+            if match:
+                return match.group(1)
 
         raise ValueError(f"Invalid Spotify URL: {spotify_url}")
 
