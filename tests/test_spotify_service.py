@@ -21,3 +21,40 @@ class TestSpotifyService(unittest.TestCase):
                 "https://open.spotify.com/track/6rqhFgbbKwnb9MLmUQDhG6"
             )
         )
+
+    def test_extract_id(self):
+        self.assertEqual(
+            self.service.extract_id(
+                "https://open.spotify.com/track/6rqhFgbbKwnb9MLmUQDhG6"
+            ),
+            "6rqhFgbbKwnb9MLmUQDhG6",
+        )
+
+    def test_get_type(self):
+        self.assertEqual(
+            self.service.get_type(
+                "https://open.spotify.com/track/6rqhFgbbKwnb9MLmUQDhG6"
+            ),
+            "track",
+        )
+
+        self.assertEqual(
+            self.service.get_type(
+                "https://open.spotify.com/episode/6rqhFgbbKwnb9MLmUQDhG6"
+            ),
+            "episode",
+        )
+
+        self.assertEqual(
+            self.service.get_type(
+                "https://open.spotify.com/show/6rqhFgbbKwnb9MLmUQDhG6"
+            ),
+            "show",
+        )
+
+        self.assertEqual(
+            self.service.get_type(
+                "https://open.spotify.com/playlist/6rqhFgbbKwnb9MLmUQDhG6"
+            ),
+            "playlist",
+        )
