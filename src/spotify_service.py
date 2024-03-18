@@ -46,10 +46,10 @@ class SpotifyService:
             raise ValueError(f"Invalid Spotify URL: {spotify_url}")
 
         url_types = {
-            "track": r"/track/(\w+)",
-            "episode": r"/episode/(\w+)",
-            "show": r"/show/(\w+)",
-            "playlist": r"/playlist/(\w+)",
+            "track": r"/track/(\w+)(\?si=.*)?",
+            "episode": r"/episode/(\w+)(\?si=.*)?",
+            "show": r"/show/(\w+)(\?si=.*)?",
+            "playlist": r"/playlist/(\w+)(\?si=.*)?",
         }
 
         for url_type, pattern in url_types.items():
