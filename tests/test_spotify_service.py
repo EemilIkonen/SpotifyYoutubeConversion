@@ -20,7 +20,8 @@ class TestSpotifyService(unittest.TestCase):
         self.assertTrue(
             self.service.test_url(
                 "https://open.spotify.com/track/6rqhFgbbKwnb9MLmUQDhG6"
-            )
+            ),
+            "The URL test should return True for a valid spotify URL.",
         )
 
     def test_extract_id(self):
@@ -29,6 +30,7 @@ class TestSpotifyService(unittest.TestCase):
                 "https://open.spotify.com/track/6rqhFgbbKwnb9MLmUQDhG6"
             ),
             "6rqhFgbbKwnb9MLmUQDhG6",
+            "extract_id is not returning the correct ID.",
         )
         self.assertEqual(
             self.service.extract_id(
@@ -44,6 +46,7 @@ class TestSpotifyService(unittest.TestCase):
                 "https://open.spotify.com/track/6rqhFgbbKwnb9MLmUQDhG6"
             ),
             "track",
+            "get_type is not returning the correct type 'track'.",
         )
 
         self.assertEqual(
@@ -51,6 +54,7 @@ class TestSpotifyService(unittest.TestCase):
                 "https://open.spotify.com/episode/6rqhFgbbKwnb9MLmUQDhG6"
             ),
             "episode",
+            "get_type is not returning the correct type 'episode'.",
         )
 
         self.assertEqual(
@@ -58,6 +62,7 @@ class TestSpotifyService(unittest.TestCase):
                 "https://open.spotify.com/show/6rqhFgbbKwnb9MLmUQDhG6"
             ),
             "show",
+            "get_type is not returning the correct type 'show'.",
         )
 
         self.assertEqual(
@@ -65,6 +70,9 @@ class TestSpotifyService(unittest.TestCase):
                 "https://open.spotify.com/playlist/6rqhFgbbKwnb9MLmUQDhG6"
             ),
             "playlist",
+            "get_type is not returning the correct type 'playlist'.",
+        )
+
     def test_get_info(self):
         info = self.service.get_info(
             "https://open.spotify.com/episode/2alNsrB9p601PFWvt50yZx?si=f59dd04963714d44",
