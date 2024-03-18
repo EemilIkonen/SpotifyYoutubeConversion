@@ -14,6 +14,7 @@ spotify_client_secret = settings.SPOTIFY_CLIENT_SECRET
 class TestSpotifyService(unittest.TestCase):
     def setUp(self):
         self.service = SpotifyService(spotify_client_id, spotify_client_secret)
+        self.maxDiff = None
 
     def test_test_url(self):
         self.assertTrue(
