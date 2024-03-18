@@ -92,9 +92,9 @@ class SpotifyService:
         if spotify_type == "track":
             return self.sp.track(spotify_id)
         elif spotify_type == "episode":
-            return self.sp.episode(spotify_id)
+            return self.sp.episode(spotify_id, market="FI")
         elif spotify_type == "show":
-            return self.sp.show(spotify_id)
+            return self.sp.show(spotify_id, market="FI")
         elif spotify_type == "playlist":
             return self.sp.playlist(spotify_id)
         else:
