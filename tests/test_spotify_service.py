@@ -30,6 +30,13 @@ class TestSpotifyService(unittest.TestCase):
             ),
             "6rqhFgbbKwnb9MLmUQDhG6",
         )
+        self.assertEqual(
+            self.service.extract_id(
+                "https://open.spotify.com/episode/2alNsrB9p601PFWvt50yZx?si=f59dd04963714d44"
+            ),
+            "2alNsrB9p601PFWvt50yZx",
+            "extract_id is not returning the correct ID.",
+        )
 
     def test_get_type(self):
         self.assertEqual(
